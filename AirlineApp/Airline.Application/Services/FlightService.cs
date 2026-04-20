@@ -34,7 +34,7 @@ public class FlightService
             Id = _nextId++,
             FlightNumber = flightNumber.ToUpper(),
             DepartureAirport = departureAirport.ToUpper(),
-            ArrivalAirport = arrivalAirport,
+            ArrivalAirport = arrivalAirport.ToUpper(),
             DepartureTime = departureTime,
             ArrivalTime = arrivalTime,
             Status = FlightStatus.Scheduled,
