@@ -76,6 +76,7 @@ public class FlightService
             throw new InvalidOperationException("Flight not found.");
 
         flight.Status = newStatus;
+        _flightRepository.Update(flight);
     }
 
     // MISSING_TARGET: GetFlightsByRoute
