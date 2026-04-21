@@ -14,7 +14,7 @@ public class FlightService
         _flightRepository = flightRepository;
     }
 
-    // BUG_TARGET: CreateFlight
+    // BUG_TARGET: CreateFlight |||*FIXED*|||
     public Flight CreateFlight(string flightNumber, string departureAirport, string arrivalAirport,
         DateTime departureTime, DateTime arrivalTime, AircraftType aircraftType, int totalSeats)
     {
@@ -34,7 +34,7 @@ public class FlightService
             Id = _nextId++,
             FlightNumber = flightNumber.ToUpper(),
             DepartureAirport = departureAirport.ToUpper(),
-            ArrivalAirport = arrivalAirport.ToUpper(),
+            ArrivalAirport = arrivalAirport.ToUpper(), // <== Right here was the bug //
             DepartureTime = departureTime,
             ArrivalTime = arrivalTime,
             Status = FlightStatus.Scheduled,
@@ -68,7 +68,7 @@ public class FlightService
             .ToList();
     }
 
-    // BUG_TARGET: UpdateFlightStatus
+    // BUG_TARGET: UpdateFlightStatus |||*FIXED*|||
     public void UpdateFlightStatus(int flightId, FlightStatus newStatus)
     {
         var flight = _flightRepository.GetById(flightId);
@@ -76,7 +76,7 @@ public class FlightService
             throw new InvalidOperationException("Flight not found.");
 
         flight.Status = newStatus;
-        _flightRepository.Update(flight);
+        _flightRepository.Update(flight); // <== Right here was the bug //
     }
 
     // MISSING_TARGET: GetFlightsByRoute

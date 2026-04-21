@@ -15,7 +15,7 @@ public class PassengerService
         _bookingRepository = bookingRepository;
     }
 
-    // BUG_TARGET: RegisterPassenger
+    // BUG_TARGET: RegisterPassenger |||*FIXED*|||
     public Passenger RegisterPassenger(string firstName, string lastName, string passportNumber, string email, string phoneNumber)
     {
         if (string.IsNullOrWhiteSpace(firstName))
@@ -24,7 +24,7 @@ public class PassengerService
             throw new ArgumentException("Last name cannot be empty.");
         if (string.IsNullOrWhiteSpace(passportNumber))
             throw new ArgumentException("Passport number cannot be empty.");
-        if (string.IsNullOrWhiteSpace(email))
+        if (string.IsNullOrWhiteSpace(email) || !email.Contains("@")) // <== Right here was the bug //
             throw new ArgumentException("Invalid email address.");
 
         var existingPassenger = _passengerRepository.GetByPassport(passportNumber);
