@@ -242,7 +242,7 @@ public class BookingService
         return newBooking;
     }
 
-    // MISSING_TARGET: CalculateRouteRevenue
+    // MISSING_TARGET: CalculateRouteRevenue |||*FIXED*||| [Forgot to add "!" at start and test still went through for some reason]
     public decimal CalculateRouteRevenue(string departureAirport, string arrivalAirport)
     {
         if (string.IsNullOrWhiteSpace(departureAirport) || string.IsNullOrWhiteSpace(arrivalAirport))
@@ -255,6 +255,7 @@ public class BookingService
         foreach (var flight in flights)
         {
             totalRevenue += _bookingRepository.GetByFlightId(flight.Id)
+                .Where(b => !b.Status.Equals(BookingStatus.Cancelled)) // <== Bug was right here //
                 .Sum(b => b.Price);
         }
 
