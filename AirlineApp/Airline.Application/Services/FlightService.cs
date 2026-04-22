@@ -109,7 +109,14 @@ public class FlightService
     // MISSING_TARGET: CancelFlight
     public void CancelFlight(int flightId)
     {
-        throw new NotImplementedException();
+        var flight = _flightRepository.GetById(flightId);
+        if (flight == null)
+            throw new InvalidOperationException("Flight not found.");
+        if (flight.Status == FlightStatus.Departed)
+            throw new InvalidOperationException("Flight has departed already");
+
+        flight.Status = FlightStatus.Cancelled;
+        _flightRepository.Update(flight);
     }
 
     public Flight? GetFlightById(int id)
