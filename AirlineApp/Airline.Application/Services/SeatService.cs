@@ -58,7 +58,7 @@ public class SeatService
         return _seatRepository.GetAvailableByFlight(flightId);
     }
 
-    // BUG_TARGET: CalculateOccupancyRate
+    // BUG_TARGET: CalculateOccupancyRate |||*FIXED*|||
     public decimal CalculateOccupancyRate(int flightId)
     {
         var flight = _flightRepository.GetById(flightId);
@@ -69,7 +69,7 @@ public class SeatService
         if (seats.Count == 0)
             return 0;
 
-        var occupied = seats.Count(s => s.IsAvailable);
+        var occupied = seats.Count(s => !s.IsAvailable); // <== Bug was right here //
         return Math.Round((decimal)occupied / seats.Count * 100, 2);
     }
 
