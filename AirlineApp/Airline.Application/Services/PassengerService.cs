@@ -76,7 +76,7 @@ public class PassengerService
     // BUG_TARGET: UpdatePassengerInfo
     public void UpdatePassengerInfo(int passengerId, string email, string phoneNumber)
     {
-        if (string.IsNullOrWhiteSpace(email))
+        if (string.IsNullOrWhiteSpace(email) || !email.Contains("@"))
             throw new ArgumentException("Invalid email address.");
 
         var passenger = _passengerRepository.GetById(passengerId);
