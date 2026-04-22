@@ -155,10 +155,10 @@ public class BookingService
         return (decimal)newClass;
     }
 
-    // MISSING_TARGET: GetTotalBookingCount
+    // MISSING_TARGET: GetTotalBookingCount [METHOD IMPLEMENTED]
     public int GetTotalBookingCount()
     {
-        throw new NotImplementedException();
+        return _bookingRepository.GetAll().Count;
     }
 
     // BUG_TARGET: GetTotalRevenue
