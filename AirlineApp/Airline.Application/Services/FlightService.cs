@@ -94,10 +94,10 @@ public class FlightService
         return _flightRepository.GetByStatus(FlightStatus.Delayed);
     }
 
-    // MISSING_TARGET: GetFlightsByDateRange
+    // MISSING_TARGET: GetFlightsByDateRange [IMPLEMENTED]
     public List<Flight> GetFlightsByDateRange(DateTime from, DateTime to)
     {
-        throw new NotImplementedException();
+        return _flightRepository.GetByDateRange(from, to);
     }
 
     // BUG_TARGET: GetFlightCount
