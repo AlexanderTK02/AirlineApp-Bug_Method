@@ -191,7 +191,7 @@ public class BookingService
         return string.Join("\n", lines);
     }
 
-    // MISSING_TARGET: ReschedulePassenger
+    // MISSING_TARGET: ReschedulePassenger |||*FIXED*|||
     public Booking ReschedulePassenger(int bookingId, int newFlightId)
     {
         var oldBooking = _bookingRepository.GetById(bookingId);
@@ -219,7 +219,7 @@ public class BookingService
             oldSeat.IsAvailable = false;
             _seatRepository.Update(oldSeat);
         }
-        oldBooking.Status = BookingStatus.Confirmed;
+        oldBooking.Status = BookingStatus.Cancelled; // <== Bug was right here //
         _bookingRepository.Update(oldBooking);
 
         // Book first available seat on new flight
