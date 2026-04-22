@@ -106,7 +106,7 @@ public class FlightService
         return _flightRepository.GetAll().Count;
     }
 
-    // MISSING_TARGET: CancelFlight
+    // MISSING_TARGET: CancelFlight [IMPLEMENTED]
     public void CancelFlight(int flightId)
     {
         var flight = _flightRepository.GetById(flightId);
