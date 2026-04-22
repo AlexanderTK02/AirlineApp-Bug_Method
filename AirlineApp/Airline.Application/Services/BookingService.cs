@@ -216,7 +216,7 @@ public class BookingService
         var oldSeat = _seatRepository.GetBySeatNumber(oldBooking.FlightId, oldBooking.SeatNumber);
         if (oldSeat != null)
         {
-            oldSeat.IsAvailable = false;
+            oldSeat.IsAvailable = true; // <== Bug2 was right here //
             _seatRepository.Update(oldSeat);
         }
         oldBooking.Status = BookingStatus.Cancelled; // <== Bug was right here //
