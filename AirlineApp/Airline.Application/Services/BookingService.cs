@@ -145,7 +145,14 @@ public class BookingService
     // MISSING_TARGET: UpgradeSeat
     public decimal UpgradeSeat(int bookingId, SeatClass newClass)
     {
-        throw new NotImplementedException();
+        var booking = _bookingRepository.GetById(bookingId);
+        if (booking == null)
+            throw new InvalidOperationException("Booking not found.");
+
+        booking.SeatClass = newClass;
+        _bookingRepository.Update(booking);
+
+        return (decimal)newClass;
     }
 
     // MISSING_TARGET: GetTotalBookingCount
